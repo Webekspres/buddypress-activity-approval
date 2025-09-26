@@ -85,11 +85,15 @@ class BP_Activity_Approval_Core {
         // Get plugin settings
         $settings = get_option( 'bp_activity_approval_settings', array() );
         
-        // Check if this activity type requires approval
-        $require_approval_for = isset( $settings['require_approval_for'] ) ? $settings['require_approval_for'] : array();
+        // Check if this activity type requires approval - default to all activity types
+        $require_approval_for = isset( $settings['require_approval_for'] ) ? $settings['require_approval_for'] : array( 'activity_update', 'activity_comment' );
         
+        // For now, require approval for all new activities (can be configured later)
         if ( ! in_array( $activity->type, $require_approval_for, true ) ) {
-            return;
+            // Still require approval for main activity types
+            if ( ! in_array( $activity->type, array( 'activity_update', 'activity_comment' ), true ) ) {
+                return;
+            }
         }
 
         // Skip approval for administrators if setting is enabled
@@ -106,8 +110,8 @@ class BP_Activity_Approval_Core {
             return;
         }
 
-        // Set activity to pending status
-        $activity->hide_sitewide = 1; // Hide from sitewide activity
+        // Set activity to pending status - don't hide completely, just mark as pending
+        // We'll handle visibility in the filter_pending_activities method
         
         // Add custom meta to mark as pending approval
         add_action( 'bp_activity_after_save', function( $saved_activity ) use ( $activity ) {
