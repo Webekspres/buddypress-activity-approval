@@ -1,0 +1,554 @@
+/**
+ * Admin CSS for BuddyPress Activity Approval
+ *
+ * @package BPActivityApproval
+ * @since 1.0.0
+ */
+
+/* ==========================================================================
+   Admin Dashboard Styles
+   ========================================================================== */
+
+.bp-activity-approval-admin {
+    margin: 20px 0;
+}
+
+.bp-activity-approval-admin .wrap {
+    max-width: 1200px;
+}
+
+/* Dashboard Header */
+.bp-activity-approval-header {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.bp-activity-approval-header h1 {
+    margin: 0 0 10px 0;
+    color: #23282d;
+}
+
+.bp-activity-approval-header .description {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Stats Cards */
+.approval-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    transition: box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+
+.stat-card .stat-number {
+    font-size: 32px;
+    font-weight: 600;
+    color: #0073aa;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-card .stat-label {
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card.pending .stat-number {
+    color: #d63638;
+}
+
+.stat-card.approved .stat-number {
+    color: #00a32a;
+}
+
+.stat-card.rejected .stat-number {
+    color: #d63638;
+}
+
+/* Filter Bar */
+.approval-filters {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.approval-filters label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.approval-filters select,
+.approval-filters input[type="date"] {
+    min-width: 150px;
+}
+
+.approval-filters .button {
+    margin-left: auto;
+}
+
+/* Activity List Table */
+.wp-list-table.activities {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.wp-list-table.activities .column-content {
+    max-width: 400px;
+}
+
+.wp-list-table.activities .activity-content {
+    max-height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.wp-list-table.activities .activity-content.expanded {
+    max-height: none;
+}
+
+.wp-list-table.activities .content-preview {
+    color: #666;
+    font-style: italic;
+}
+
+.wp-list-table.activities .expand-content {
+    color: #0073aa;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.wp-list-table.activities .expand-content:hover {
+    text-decoration: underline;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.pending {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-badge.approved {
+    background: #d1edff;
+    color: #0073aa;
+    border: 1px solid #b3d9ff;
+}
+
+.status-badge.rejected {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f1aeb5;
+}
+
+/* Action Buttons */
+.activity-actions {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.activity-actions .button {
+    font-size: 11px;
+    padding: 2px 8px;
+    height: auto;
+    line-height: 1.4;
+}
+
+.button.approve-activity {
+    background: #00a32a;
+    border-color: #00a32a;
+    color: #fff;
+}
+
+.button.approve-activity:hover {
+    background: #008a20;
+    border-color: #008a20;
+}
+
+.button.reject-activity {
+    background: #d63638;
+    border-color: #d63638;
+    color: #fff;
+}
+
+.button.reject-activity:hover {
+    background: #b32d2e;
+    border-color: #b32d2e;
+}
+
+.button.view-activity {
+    background: #f0f0f1;
+    border-color: #c3c4c7;
+    color: #50575e;
+}
+
+.button.view-activity:hover {
+    background: #e0e0e1;
+    border-color: #8c8f94;
+}
+
+/* ==========================================================================
+   Modal Styles
+   ========================================================================== */
+
+.approval-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9f9f9;
+}
+
+.modal-header .modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+    color: #000;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    background: #f9f9f9;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Activity Preview in Modal */
+.activity-preview {
+    margin-bottom: 20px;
+}
+
+.activity-preview h4 {
+    margin: 0 0 10px 0;
+    color: #23282d;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.activity-preview .activity-content {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Admin Note Section */
+.admin-note-section {
+    margin-bottom: 20px;
+}
+
+.admin-note-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.admin-note-section textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Activity Details Modal */
+.activity-meta {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.activity-meta p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+
+.activity-meta p:last-child {
+    margin-bottom: 0;
+}
+
+.activity-full-content {
+    font-size: 14px;
+    line-height: 1.6;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 15px;
+}
+
+/* ==========================================================================
+   Admin Bar Styles
+   ========================================================================== */
+
+#wp-admin-bar-bp-activity-approval .ab-item {
+    color: #ff6900 !important;
+}
+
+#wp-admin-bar-bp-activity-approval .pending-count {
+    background: #d63638;
+    color: #fff;
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 5px;
+    display: inline-block;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Settings Page Styles
+   ========================================================================== */
+
+.bp-activity-approval-settings {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.bp-activity-approval-settings .form-table th {
+    width: 200px;
+    padding-left: 0;
+}
+
+.bp-activity-approval-settings .form-table td {
+    padding-left: 0;
+}
+
+.setting-description {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media screen and (max-width: 782px) {
+    .approval-stats {
+        flex-direction: column;
+    }
+    
+    .approval-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .approval-filters .button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .activity-actions {
+        flex-direction: column;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .modal-footer {
+        flex-direction: column-reverse;
+    }
+    
+    .modal-footer .button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .wp-list-table.activities .column-content {
+        max-width: 200px;
+    }
+    
+    .wp-list-table.activities .activity-content {
+        max-height: 60px;
+    }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+
+.error {
+    border-color: #d63638 !important;
+    box-shadow: 0 0 2px rgba(214, 54, 56, 0.8) !important;
+}
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Animation Classes
+   ========================================================================== */
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
